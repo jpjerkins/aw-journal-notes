@@ -4,6 +4,10 @@ modified: 20240416230950577
 creator: jpjerkins
 title: $:/plugins/pjerkins/aw-journal-notes/ViewTemplates/JournalNotesDraggableTemplate
 
+\import [[$:/plugins/pjerkins/aw-ui-controls/Macros/ActionBarMacros]]
+
 {{||$:/plugins/pjerkins/aw-ui-controls/ViewTemplates/DragHandle}}
+<<threeDotMenu>>
 <$link />
+<<actionBar "MeetingActionBarControl">>
 <br/>

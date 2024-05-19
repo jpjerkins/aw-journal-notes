@@ -1,0 +1,38 @@
+created: 20240416003253401
+creator: jpjerkins
+modified: 20240416230950577
+creator: jpjerkins
+title: $:/plugins/pjerkins/aw-journal-notes/ViewTemplates/MeetingMoveIcon
+tags: MeetingActionBarControl
+
+\import [[$:/plugins/pjerkins/aw-ui-controls/Macros/ActionBarMacros]]
+
+\define dateActions()
+<$let
+ meetingOldTiddlerName={{{ [<currentTiddler>split[]butfirst[21]join[]] }}}
+ meetingNameRoot={{{ [<meetingOldTiddlerName>split[]butlast[11]join[]] }}}
+ meetingNewTiddlerName={{{ [<meetingNameRoot>addsuffix[ ]addsuffix<actionValue>] }}}
+ newJournalName={{{ [[Journals/]addsuffix<actionValue>] }}}
+>
+<$action-log
+ meetingOldTiddlerName=<<meetingOldTiddlerName>>
+ meetingNameRoot=<<meetingNameRoot>>
+ meetingNewTiddlerName=<<meetingNewTiddlerName>>
+ actionValue=<<actionValue>> />
+<$action-listops $tiddler=<<meetingOldTiddlerName>> $tags="+[!prefix[Journals/]] [<newJournalName>]" />
+<$action-sendmessage $message="tm-rename-tiddler" from=<<meetingOldTiddlerName>> to=<<meetingNewTiddlerName>> />
+<$vars currentTiddler=<<meetingOldTiddlerName>> >
+<<closeActionBarActions>>
+</$vars>
+</$let>
+\end
+
+<$macrocall
+ $name="edit-date"
+ type="button"
+ confirm="no"
+ tiddler=`$:/temp/MeetingDates/$(currentTiddler)$`
+ format="YYYY-0MM-0DD"
+ field="meeting-date"
+ inputActions=<<dateActions>>
+/>

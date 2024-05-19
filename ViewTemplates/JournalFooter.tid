@@ -11,10 +11,13 @@ list-after: $:/core/ui/ViewTemplate/body
 !! Meetings
 <$edit-text field="new-meeting-name" />
 <$button>
-<$vars newMeetingTitle=`${[{!!new-meeting-name}]}$ ${[<currentTiddler>removeprefix[Journals/]]}$`>
-<$action-sendmessage $message="tm-new-tiddler" title=<<newMeetingTitle>> tags=`[[$(currentTiddler)$]] Meetings` />
+<$let
+ meetingDate=`${[<currentTiddler>removeprefix[Journals/]]}$`
+ newMeetingTitle=`${[{!!new-meeting-name}]}$ $(meetingDate)$`
+>
+<$action-sendmessage $message="tm-new-tiddler" title=<<newMeetingTitle>> tags=`[[$(currentTiddler)$]] Meetings` meeting-date=<<meetingDate>> />
 <$action-setfield $field="new-meeting-name" $value="" />
-</$vars>
+</$let>
 New Meeting
 </$button>
 
