@@ -1,0 +1,12 @@
+{
+  "created": "20240519000820261",
+  "title": "$:/plugins/pjerkins/aw-journal-notes",
+  "modified": "20240519000820261",
+  "core.version": ">=5.3.3",
+  "description": "ArchWork Journal Notes plugin",
+  "plugin-type": "plugin",
+  "version": "0.0.13",
+  "name": "aw-journal-notes",
+  "dependents": "[[$:/plugins/pjerkins/aw-journal-notes]]",
+  "list": "readme"
+}
