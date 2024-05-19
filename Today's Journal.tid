@@ -9,9 +9,9 @@ tags: $:/tags/SideBarSegment
 
 \define dateActions()
 <$vars selectedJournal=<<selectedJournalName>> journalText={{$:/config/NewJournal/Text}}>
-<$reveal type="match" state=<<selectedJournal>> text="">
+<$list filter="[<selectedJournal>is[missing]]">
 <$action-createtiddler $basetitle=<<selectedJournal>> tags="Journal" text=<<journalText>>/>
-</$reveal>
+</$list>
 </$vars>
 <$action-setfield $tiddler="Today's Journal" $field="selected-date" $value="" />
 \end
