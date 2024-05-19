@@ -1,0 +1,49 @@
+created: 20240416003253401
+creator: jpjerkins
+modified: 20240416230950577
+creator: jpjerkins
+title: $:/plugins/pjerkins/aw-journal-notes/Today's Journal
+tags: $:/tags/SideBarSegment
+
+\define selectedJournalName() Journals/$(actionValue)$
+
+\define dateActions()
+<$vars selectedJournal=<<selectedJournalName>> journalText={{$:/config/NewJournal/Text}}>
+<$reveal type="match" state=<<selectedJournal>> text="">
+<$action-createtiddler $basetitle=<<selectedJournal>> tags="Journal" text=<<journalText>>/>
+</$reveal>
+</$vars>
+<$action-setfield $tiddler="Today's Journal" $field="selected-date" $value="" />
+\end
+
+<$vars
+ journalDate={{$:/temp/SelectedJournal!!text}}
+ journalDateString={{{ [{$:/temp/SelectedJournal!!text}addsuffix[T12:00:00]parsedate[ddd, MM/0DD]] }}}
+ todayDate=<<now YYYY-0MM-0DD>> >
+<$list filter=`[[Journals/$(journalDate)$]]`>
+
+<% if [<journalDate>compare:string<todayDate>] %>
+
+! <$link to=<<currentTiddler>> >Today's Meetings</$link>
+
+<% else %>
+
+! <$link to=<<currentTiddler>> ><<journalDateString>></$link>
+
+<% endif %>
+[[Other Journals]] | Pick one: <$macrocall $name="edit-date" type="button" confirm="no" tiddler="$:/temp/SelectedJournal" format="YYYY-0MM-0DD" field="text" inputActions=<<dateActions>> 
+ />
+<% if [<journalDate>!compare:string<todayDate>] %>
+|
+<$button>
+<$action-setfield $tiddler="$:/temp/SelectedJournal" text=<<now YYYY-0MM-0DD>> />
+Today
+</$button>
+<% endif %>
+
+<$transclude $tiddler=<<currentTiddler>> />
+
+{{||$:/plugins/pjerkins/aw-journal-notes/ViewTemplates/JournalFooter}}
+
+</$list>
+</$vars>

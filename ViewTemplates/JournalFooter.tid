@@ -1,0 +1,23 @@
+created: 20240416003253401
+creator: jpjerkins
+modified: 20240416230950577
+creator: jpjerkins
+tags: template $:/tags/ViewTemplate
+title: $:/plugins/pjerkins/aw-journal-notes/ViewTemplates/JournalFooter
+list-after: $:/core/ui/ViewTemplate/body
+
+<% if [is[current]tag[Journal]] %>
+
+!! Meetings
+<$edit-text field="new-meeting-name" />
+<$button>
+<$vars newMeetingTitle=`${[{!!new-meeting-name}]}$ ${[<currentTiddler>removeprefix[Journals/]]}$`>
+<$action-sendmessage $message="tm-new-tiddler" title=<<newMeetingTitle>> tags=`[[$(currentTiddler)$]] Meetings` />
+<$action-setfield $field="new-meeting-name" $value="" />
+</$vars>
+New Meeting
+</$button>
+
+<$macrocall $name="list-tagged-draggable" tag=<<currentTiddler>> itemTemplate="$:/plugins/pjerkins/aw-journal-notes/ViewTemplates/JournalNotesDraggableTemplate" emptyMessage="You don't have any meetings this day" />
+
+<% endif %>
