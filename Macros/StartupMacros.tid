@@ -1,0 +1,12 @@
+created: 20240519000820261
+creator: jpjerkins
+modified: 20240519000820261
+modifier: jpjerkins
+tags: $:/tags/StartupAction/PostRender
+title: $:/plugins/pjerkins/aw-journal-notes/Macros/StartupMacros
+
+<$vars selectedJournal=<<now YYYY-0MM-0DD>> journalText={{$:/config/NewJournal/Text}}>
+<$list filter="[[$:/temp/SelectedJournal]is[missing]]">
+<$action-createtiddler $basetitle="$:/temp/SelectedJournal" text=<<selectedJournal>>/>
+</$list>
+</$vars>
