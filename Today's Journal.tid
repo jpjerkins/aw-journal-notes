@@ -31,14 +31,16 @@ tags: $:/tags/SideBarSegment
 ! <$link to=<<currentTiddler>> ><<journalDateString>></$link>
 
 <% endif %>
-[[Other Journals]] | Pick one: <$macrocall $name="edit-date" type="button" confirm="no" tiddler="$:/temp/SelectedJournal" format="YYYY-0MM-0DD" field="text" inputActions=<<dateActions>> 
- />
+
 <% if [<journalDate>!compare:string<todayDate>] %>
-|
 <$button>
 <$action-setfield $tiddler="$:/temp/SelectedJournal" text=<<now YYYY-0MM-0DD>> />
 Today
-</$button>
+</$button> <$macrocall $name="edit-date" id="NotToday" type="button" confirm="no" tiddler="$:/temp/SelectedJournal" format="YYYY-0MM-0DD" field="text" inputActions=<<dateActions>> 
+ />
+<% else %>
+Pick a day: <$macrocall $name="edit-date" id="Today" type="button" confirm="no" tiddler="$:/temp/SelectedJournal" format="YYYY-0MM-0DD" field="text" inputActions=<<dateActions>> 
+ />
 <% endif %>
 
 <$transclude $tiddler=<<currentTiddler>> />
