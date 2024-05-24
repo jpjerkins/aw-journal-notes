@@ -27,6 +27,8 @@ tags: MeetingActionBarControl
 </$let>
 \end
 
+Move:
+
 <$macrocall
  $name="edit-date"
  type="button"
